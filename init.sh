@@ -4,8 +4,9 @@
 
 set -e
 
-# source variables
-source common.sh
+USER=$(cat user)
+USER_HOME="/home/$USER"
+PACKAGES=$(cat packages)
 
 printf "\nStarting setup...\n\n"
 
