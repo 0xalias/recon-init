@@ -50,8 +50,12 @@ printf "\nAdding %s user\n" $OS_USER
 adduser --home $OS_USER_HOME --disabled-password --gecos "" $OS_USER
 
 # add .ssh dir
+printf "\nCreating %s directory\n" "$OS_USER_HOME/.ssh"
 mkdir $OS_USER_HOME/.ssh
-chmod 700 $OS_USER_HOME/.ssh
+
+# copy authorized_keys
+printf "\nCopying authorized_keys\n"
+cp ~/.ssh/authorized_keys $OS_USER_HOME/.ssh/
 
 # add user to sudoers
 printf "\nAdding %s user to sudoers\n" $OS_USER
@@ -64,6 +68,9 @@ touch "$OS_USER_HOME/.sudo_as_admin_successful"
 # create new ssh key
 printf "\nCreating SSH key\n"
 ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f $PVT_KEY_PATH -q -N ''
+
+# set owner and perms for ~/.ssh and keys
+chmod 700 $OS_USER_HOME/.ssh
 chmod 600 $PVT_KEY_PATH
 chmod 644 $PUB_KEY_PATH
 chown -R $OS_USER:$OS_USER $OS_USER_HOME
