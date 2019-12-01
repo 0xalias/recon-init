@@ -48,6 +48,10 @@ apt install -y ${PACKAGES[@]}
 printf "\nAdding %s user\n" $OS_USER
 adduser --home $OS_USER_HOME --disabled-password --gecos "" $OS_USER
 
+# add .ssh dir
+mkdir $OS_USER_HOME/.ssh
+chmod 700 $OS_USER_HOME/.ssh
+
 # add user to sudoers
 printf "\nAdding %s user to sudoers\n" $OS_USER
 usermod -aG sudo $OS_USER
@@ -59,6 +63,9 @@ touch "$OS_USER_HOME/.sudo_as_admin_successful"
 # create new ssh key
 printf "\nCreating SSH key\n"
 ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f $SSH_KEY_PATH -q -N ''
+chmod 600 $SSH_KEY_PATH
+chmod 644 $SSH_KEY_PATH.pub
+
 
 # push new ssh key to GH
 printf "\nPushing SSH key to GH\n"
