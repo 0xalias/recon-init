@@ -66,6 +66,7 @@ printf "\nCreating SSH key\n"
 ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f $PVT_KEY_PATH -q -N ''
 chmod 600 $PVT_KEY_PATH
 chmod 644 $PUB_KEY_PATH
+chown -R $OS_USER:$OS_USER $OS_USER_HOME
 
 # push new public ssh key to GH
 printf "\nPushing SSH key to GH\n"
