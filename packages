@@ -1,5 +1,5 @@
+build-essential
 curl
-debugfs
 git
 grep
 jq

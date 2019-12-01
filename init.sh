@@ -19,7 +19,7 @@ fi
 DT="$(date +%Y%m%d%H%M%S)"
 
 # OS Variables
-OS_USER="0xalias"
+OS_USER="alias"
 OS_USER_HOME="/home/$OS_USER"
 SSH_KEY_PATH="$OS_USER_HOME/.ssh/id_rsa"
 EMAIL="x@0xalias.com"
@@ -40,17 +40,13 @@ apt upgrade -y
 
 # OS package installs
 printf "\nInstalling OS packages:\n"
-for p in "${PACKAGES[@]}"; do echo " --> $p"; done
+for p in ${PACKAGES[@]}; do echo " --> $p"; done
 echo ""
-apt install -y "${PACKAGES[@]}"
-
-# add group
-printf "\nAdding %s group\n" $OS_USER
-add group $OS_USER
+apt install -y ${PACKAGES[@]}
 
 # add user
 printf "\nAdding %s user\n" $OS_USER
-adduser --home $OS_USER_HOME --ingroup $OS_USER --disabled-password $OS_USER
+adduser --home $OS_USER_HOME --disabled-password --gecos "" $OS_USER
 
 # add user to sudoers
 printf "\nAdding %s user to sudoers\n" $OS_USER
