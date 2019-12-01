@@ -33,15 +33,6 @@ GH_TOKEN="$1" # do-recon token
 
 printf "\nStarting setup...\n\n"
 
-# create new ssh key
-printf "\nCreating SSH key\n"
-ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f $SSH_KEY_PATH -q -N ''
-
-# push new ssh key to GH
-printf "\nPushing SSH key to GH\n"
-KEY_CONTENTS="$(cat $SSH_KEY_PATH)"
-curl -u "${GH_USER}:${GH_TOKEN}" -d "{\"title\":\"${GH_KEY_NAME}\",\"key\":\"${KEY_CONTENTS}\"}" "$GH_KEYS_API_ENDPOINT"
-
 # OS update
 printf "\nUpdating the OS packages\n"
 apt update
@@ -68,3 +59,14 @@ usermod -aG sudo $OS_USER
 # don't prompt for a password when using sudo
 echo "$OS_USER ALL=(ALL) NOPASSWD: ALL" | tee /etc/sudoers.d/$OS_USER
 touch "$OS_USER_HOME/.sudo_as_admin_successful"
+
+# create new ssh key
+printf "\nCreating SSH key\n"
+ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f $SSH_KEY_PATH -q -N ''
+
+# push new ssh key to GH
+printf "\nPushing SSH key to GH\n"
+KEY_CONTENTS="$(cat $SSH_KEY_PATH)"
+curl -u "${GH_USER}:${GH_TOKEN}" -d "{\"title\":\"${GH_KEY_NAME}\",\"key\":\"${KEY_CONTENTS}\"}" "$GH_KEYS_API_ENDPOINT"
+
+
