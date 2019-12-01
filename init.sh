@@ -72,3 +72,8 @@ chown -R $OS_USER:$OS_USER $OS_USER_HOME
 printf "\nPushing SSH key to GH\n"
 KEY_CONTENTS=$(cat $PUB_KEY_PATH)
 curl -vvv -u "${GH_USER}:${GH_TOKEN}" -d "{\"title\":\"${GH_KEY_NAME}\",\"key\":\"${KEY_CONTENTS}\"}" $GH_KEYS_API_ENDPOINT
+
+# configure git
+su - $OS_USER
+git config --global user.email "$EMAIL"
+git config --global user.name "$OS_USER"
