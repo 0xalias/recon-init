@@ -21,7 +21,8 @@ DT="$(date +%Y%m%d%H%M%S)"
 # OS Variables
 OS_USER="alias"
 OS_USER_HOME="/home/$OS_USER"
-SSH_KEY_PATH="$OS_USER_HOME/.ssh/id_rsa"
+PVT_KEY_PATH="$OS_USER_HOME/.ssh/id_rsa"
+PUB_KEY_PATH="${PVT_KEY_PATH}.pub"
 EMAIL="x@0xalias.com"
 PACKAGES=$(cat packages)
 
@@ -62,14 +63,11 @@ touch "$OS_USER_HOME/.sudo_as_admin_successful"
 
 # create new ssh key
 printf "\nCreating SSH key\n"
-ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f $SSH_KEY_PATH -q -N ''
-chmod 600 $SSH_KEY_PATH
-chmod 644 $SSH_KEY_PATH.pub
+ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f $PVT_KEY_PATH -q -N ''
+chmod 600 $PVT_KEY_PATH
+chmod 644 $PUB_KEY_PATH
 
-
-# push new ssh key to GH
+# push new public ssh key to GH
 printf "\nPushing SSH key to GH\n"
-KEY_CONTENTS="$(cat $SSH_KEY_PATH)"
-curl -u "${GH_USER}:${GH_TOKEN}" -d "{\"title\":\"${GH_KEY_NAME}\",\"key\":\"${KEY_CONTENTS}\"}" "$GH_KEYS_API_ENDPOINT"
-
-
+KEY_CONTENTS=$(cat $PUB_KEY_PATH)
+curl -vvv -u "${GH_USER}:${GH_TOKEN}" -d "{\"title\":\"${GH_KEY_NAME}\",\"key\":\"${KEY_CONTENTS}\"}" $GH_KEYS_API_ENDPOINT
