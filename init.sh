@@ -30,7 +30,7 @@ PACKAGES=$(cat packages)
 GH_USER="0xalias"
 GH_KEYS_API_ENDPOINT="https://api.github.com/user/keys"
 GH_KEY_NAME="${GH_USER}-${DT}"
-GH_TOKEN="$1" # do-recon token
+GH_TOKEN="$1"
 
 printf "\nStarting setup...\n\n"
 
