@@ -21,6 +21,7 @@ python3-pip
 ruby-dev
 ruby-full
 sudo
+tree
 unzip
 wget
 zlib1g-dev
