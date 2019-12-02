@@ -14,9 +14,11 @@ libxslt1-dev
 most
 nano
 nmap
+python-argparse
 python-dev
 python-dnspython
 python-pip
+python-requests
 python-setuptools
 python3-pip
 ruby-dev
