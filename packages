@@ -1,5 +1,8 @@
+apt-transport-https
+ca-certificates
 build-essential
 curl
+gdebi-core
 git
 grep
 jq
@@ -23,6 +26,7 @@ python-setuptools
 python3-pip
 ruby-dev
 ruby-full
+software-properties-common
 sudo
 tree
 unzip
