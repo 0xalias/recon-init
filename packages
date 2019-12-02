@@ -13,6 +13,7 @@ libxml2-dev
 libxslt1-dev
 most
 nano
+nmap
 python-dev
 python-dnspython
 python-pip
