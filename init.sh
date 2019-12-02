@@ -75,9 +75,17 @@ chmod 600 $PVT_KEY_PATH
 chmod 644 $PUB_KEY_PATH
 chown -R $OS_USER:$OS_USER $OS_USER_HOME
 
+# allow new user to ssh
+printf "\nAllowing %s to ssh\n" $OS_USER
+echo "AllowUsers $OS_USER" | tee -a /etc/ssh/sshd_config
+printf "\nReloading ssh service\n"
+service ssh reload
+
 # push new public ssh key to GH
 printf "\nPushing SSH key to GH\n"
 KEY_CONTENTS=$(cat $PUB_KEY_PATH)
 curl -s -u "${GH_USER}:${GH_TOKEN}" -d "{\"title\":\"${GH_KEY_NAME}\",\"key\":\"${KEY_CONTENTS}\"}" $GH_KEYS_API_ENDPOINT
 
-echo "init.sh complete!"
+echo "init.sh complete! rebooting..."
+
+reboot
