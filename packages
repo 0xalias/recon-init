@@ -17,6 +17,7 @@ libxslt1-dev
 most
 nano
 nmap
+openjdk-11-jre
 python-argparse
 python-dev
 python-dnspython
