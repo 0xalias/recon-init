@@ -1,6 +1,13 @@
 #!/bin/bash
 
 # One time OS setup for reconaissance.
+# - OS update
+# - adds new user
+# - add user to sudoers
+# - allow user to SSH
+# - copy authorized keys from root to new user dir
+# - create new SSH key
+# - push new SSH key to GitHub.com
 
 set -e
 
