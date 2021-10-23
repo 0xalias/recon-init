@@ -20,10 +20,9 @@ nmap
 openjdk-11-jre
 python-argparse
 python-dev
-python-dnspython
-python-pip
-python-requests
-python-setuptools
+python3-dnspython
+python3-requests
+python3-setuptools
 python3-pip
 ruby-dev
 ruby-full
