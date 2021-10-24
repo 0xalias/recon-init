@@ -93,6 +93,10 @@ printf "\nPushing SSH key to GH\n"
 KEY_CONTENTS=$(cat $PUB_KEY_PATH)
 curl -s -u "${GH_USER}:${GH_TOKEN}" -d "{\"title\":\"${GH_KEY_NAME}\",\"key\":\"${KEY_CONTENTS}\"}" $GH_KEYS_API_ENDPOINT
 
+# add github.com to known_hosts
+ssh-keyscan github.com >> ghkey
+cat ghkey >> ~/.ssh/known_hosts
+
 echo "init.sh complete! rebooting..."
 
 reboot
